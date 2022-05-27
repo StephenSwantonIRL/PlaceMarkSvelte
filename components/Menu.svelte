@@ -1,0 +1,28 @@
+<script>
+    import Brand from "./Brand.svelte";
+
+    let isAdmin;
+</script>
+
+
+<nav class="navbar">
+    <div class="navbar-brand">
+        <Brand/>
+    </div>
+    <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false"> <span
+            aria-hidden="true"></span>
+        <span aria-hidden="true"></span> <span aria-hidden="true"></span> </a>
+    <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a id="dashboard" class="button" href="/#/dashboard"> Dashboard </a>
+                    {#if isAdmin}<a id="admin" class="button" href="/#/admin"> Admin </a>
+                    {/if}<a id="addPlace" class="button" href="/#/addPlace"> Add Place </a>
+                    <a id="logout" class="button" href="/#/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+

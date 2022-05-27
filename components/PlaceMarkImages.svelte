@@ -1,0 +1,34 @@
+<script>
+    let images = [];
+</script>
+
+<div class="field">
+    <div>
+        <div>
+            <label class="label">Add Images</label>
+            <div id="image-container">
+                {#each images as image}
+                    <img id="{image}" src="{image}" onclick="removeImage('{image}')" width="30%"
+                         style="padding-left:10px"/>
+                {/each}
+            </div>
+        </div>
+        <div class="card-content">
+            <div id="file-select" class="file has-name is-fullwidth">
+                <label class="file-label"> <input class="file-input" type="file" accept="image/png, image/jpeg">
+                    <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose a file…
+            </span>
+           </span>
+                    <span class="file-name"></span>
+                </label>
+                <a style="margin-left:10px;" onclick="uploadImage()" class="button is-primary ">Upload</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="field"><input type="hidden" id="images" name="images" value="{images}"></div>

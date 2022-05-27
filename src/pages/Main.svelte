@@ -1,0 +1,8 @@
+<section class="section">
+  <figure class="image">
+    <img src="/hero2.png">
+  </figure>
+</section>
+<section class="section">
+
+</section>

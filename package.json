@@ -1,0 +1,32 @@
+{
+  "name": "placemark",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.6.2",
+    "svelte": "^3.44.0",
+    "vite": "^2.9.9"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-basic-styles": "^34.0.0",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^34.0.0",
+    "@ckeditor/ckeditor5-dev-utils": "^30.1.5",
+    "@ckeditor/ckeditor5-editor-classic": "^34.0.0",
+    "@ckeditor/ckeditor5-essentials": "^34.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^34.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^34.0.0",
+    "axios": "^0.27.2",
+    "svelte-spa-router": "^3.2.0"
+  }
+}
