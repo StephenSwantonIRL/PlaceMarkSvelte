@@ -1,3 +1,7 @@
+<script>
+    let users = [];
+</script>
+
 <section class="section">
   <h2 class="title is-4">User Management</h2>
   <form id="category" method="POST" >

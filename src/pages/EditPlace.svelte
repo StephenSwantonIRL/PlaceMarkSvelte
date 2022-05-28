@@ -4,6 +4,7 @@
     import {getContext} from "svelte";
     import PlaceMarkImgHandler from "../../components/PlaceMarkImgHandler.svelte";
     import EditPlaceForm from "../../components/EditPlaceForm.svelte";
+    import Menu from "../../components/Menu.svelte";
 
 
     export let params;
@@ -19,7 +20,6 @@
 
     async function getPlace(id) {
         place = await placeMarkService.getPlace(id);
-        console.log(place)
         return place;
 
     }
@@ -28,14 +28,14 @@
         .then((x) => {
             return x;
         });
-    console.log(place)
+    $: console.log(place)
     let errorMessage = "";
 
 
 
 
 </script>
-
+<Menu />
 <section class="section header">
     <h1 class="title">Edit PlaceMark</h1>
 </section>

@@ -1,7 +1,7 @@
 <script>
     import Brand from "./Brand.svelte";
 
-    let isAdmin;
+    export let isAdmin;
 </script>
 
 
@@ -17,8 +17,10 @@
             <div class="navbar-item">
                 <div class="buttons">
                     <a id="dashboard" class="button" href="/#/dashboard"> Dashboard </a>
-                    {#if isAdmin}<a id="admin" class="button" href="/#/admin"> Admin </a>
-                    {/if}<a id="addPlace" class="button" href="/#/addPlace"> Add Place </a>
+                    {#if isAdmin === "true"}
+                        <a id="admin" class="button" href="/#/admin"> Admin </a>
+                    {/if}
+                    <a id="addPlace" class="button" href="/#/addPlace"> Add Place </a>
                     <a id="logout" class="button" href="/#/logout"> Logout </a>
                 </div>
             </div>

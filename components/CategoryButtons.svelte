@@ -1,5 +1,5 @@
 <script>
-  let categories = []
+  export let categories = []
 </script>
 
 <section class="section">

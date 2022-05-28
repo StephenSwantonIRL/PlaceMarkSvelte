@@ -1,10 +1,10 @@
 <script>
-  let totalCategories;
-  let totalUsers;
-  let totalPlaces;
-  let avgPerCategory;
-  let avgPerUser;
-  let topCounts;
+  let totalCategories ="";
+  let totalUsers ="";
+  let totalPlaces ="";
+  let avgPerCategory = "";
+  let avgPerUser = "";
+  let topCounts = [];
 </script>
 
 <section class="section">

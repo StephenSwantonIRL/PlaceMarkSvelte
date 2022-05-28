@@ -1,5 +1,5 @@
 <script>
-  let categories;
+  let categories = [];
 </script>
 
 <section class="section">
