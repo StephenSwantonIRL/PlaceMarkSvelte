@@ -6,7 +6,7 @@
   import UserList from "../../components/UserList.svelte";
 </script>
 
-<Menu />
+<Menu isAdmin=true />
 <section class="section header">
   <h1 class="title is-3">Admin Dashboard</h1>
 </section>

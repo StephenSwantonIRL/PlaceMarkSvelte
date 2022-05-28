@@ -60,11 +60,12 @@
         isAdmin = x;
         return x;
     });
-
-    $: console.log({isAdmin})
+    let adminValue
+    $: adminValue = {isAdmin}['isAdmin']
+    $: console.log(adminValue);
 </script>
 
-<Menu isAdmin=true />
+<Menu bind:isAdmin={adminValue} />
 
 <section class="section header">
     <h1 class="title is-3">Dashboard</h1>
@@ -93,7 +94,7 @@
                     <button class="button is-small" onclick="openModal('{placeMark._id}')">
                         View
                     </button>
-                    <a class="button is-small" href="/editPlace/{placeMark._id}">
+                    <a class="button is-small" href="/#/editPlace/{placeMark._id}">
                         Edit
                     </a> <a class="button is-small" href="/deletePlace/{placeMark._id}">
                     Delete

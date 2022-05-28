@@ -17,7 +17,7 @@
             <div class="navbar-item">
                 <div class="buttons">
                     <a id="dashboard" class="button" href="/#/dashboard"> Dashboard </a>
-                    {#if isAdmin === "true"}
+                    {#if isAdmin === true}
                         <a id="admin" class="button" href="/#/admin"> Admin </a>
                     {/if}
                     <a id="addPlace" class="button" href="/#/addPlace"> Add Place </a>
