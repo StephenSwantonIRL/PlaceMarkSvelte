@@ -1,9 +1,10 @@
 <script>
     import {onMount} from "svelte";
-    import PlaceMarkImgHandler from "../../components/PlaceMarkImgHandler.svelte";
-    import PlaceMarkImages from "../../components/PlaceMarkImages.svelte";
+
     import {push} from "svelte-spa-router";
     import {getContext} from "svelte";
+    import PlaceMarkImgHandler from "../../components/PlaceMarkImgHandler.svelte";
+    import PlaceMarkImages from "../../components/PlaceMarkImages.svelte";
     import Menu from "../../components/Menu.svelte";
     import CreatePlace from "./CreatePlace.svelte";
 
@@ -44,7 +45,7 @@
                 .create(document.querySelector('#ck-editor'))
                 .then(()=> {
                     let c = document.querySelector(".ck-editor__main");
-                    c.setAttribute('onfocusout', 'myfunction()')
+                    c.setAttribute('onfocusout', 'storeDescription()')
 
                 })
                 .catch(error => {

@@ -1,41 +1,44 @@
+<script>
+    import {onMount} from "svelte";
+    import {push} from "svelte-spa-router";
+    import {getContext} from "svelte";
+    import PlaceMarkImgHandler from "../../components/PlaceMarkImgHandler.svelte";
+    import EditPlaceForm from "../../components/EditPlaceForm.svelte";
+
+
+    export let params;
+    let _id = params.id || "";
+    let name = "";
+    let location = "";
+    let latitude = "";
+    let longitude = "";
+    let categories = "";
+    let images = "";
+
+    const placeMarkService = getContext("PlaceMarkService");
+
+    async function getPlace(id) {
+        place = await placeMarkService.getPlace(id);
+        console.log(place)
+        return place;
+
+    }
+    let description ="";
+    let place = getPlace(_id)
+        .then((x) => {
+            return x;
+        });
+    console.log(place)
+    let errorMessage = "";
+
+
+
+
+</script>
+
 <section class="section header">
-  <h1 class="title">Edit PlaceMark</h1>
+    <h1 class="title">Edit PlaceMark</h1>
 </section>
-<section class="section">
-  <form action="/editPlace/{place._id}" method="POST">
-    <div class="field">
-      <label class="label">Name</label> <input class="input" type="text" placeholder="Enter PlaceMark Name" name="name" value="{place.name}">
-    </div>
-    <div class="field">
-      <label class="label">Location</label> <input class="input" type="text" placeholder="Enter Address" name="location" value="{place.location}">
-    </div>
-    <div class="field is-horizontal">
-      <div class="field-body">
-        <div class="field">
-          <input class="input" type="text" placeholder="Enter latitude" name="latitude" value="{place.latitude}">
-        </div>
-        <div class="field">
-          <input class="input" type="text" placeholder="Enter longitude" name="longitude" value="{place.longitude}">
-        </div>
-      </div>
-    </div>
-    <div class="field">
-      <label class="label">Description</label>
-      <textarea name="description" id="ck-editor" placeholder="Tell us about this PlaceMark">
-        {place.description}
-        </textarea>
-    </div>
-    <PlaceMarkImage />
-    <div class="field"><label class="label">Categories</label>
-      <input id="input-custom-dropdown" name="categories" type="text" class="input" placeholder="Enter Categories" value="{place.categories}"></div>
-    <div class="field" id="categories"></div>
+<EditPlaceForm bind:place={place} />
 
-
-    <div class="field is-grouped">
-      <button class="button is-link">Save Changes</button>
-    </div>
-  </form>
-</section>
-
-
-<PlaceMarkImgHandler />
+<PlaceMarkImgHandler/>

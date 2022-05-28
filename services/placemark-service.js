@@ -96,6 +96,11 @@ export class PlaceMarkService {
     return res.data;
   }
 
+  async updatePlace(place) {
+    const res = await axios.post(`${this.placeMarkUrl}/api/placemark/${place._id}`, place);
+    return res.data;
+  }
+
   async deleteAllPlaces() {
     const response = await axios.delete(`${this.placeMarkUrl}/api/placemark`);
     return response.data;
