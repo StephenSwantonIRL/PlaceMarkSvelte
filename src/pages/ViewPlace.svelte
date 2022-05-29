@@ -2,7 +2,7 @@
     import {getContext} from "svelte";
     import ViewPageContents from "../../components/ViewPageContents.svelte";
     import Menu from "../../components/Menu.svelte";
-
+    import Map from "../../components/Map.svelte"
     const placeMarkService = getContext("PlaceMarkService");
 
 
@@ -25,4 +25,5 @@
 
 </script>
 <Menu />
+<Map bind:id={_id} />
 <ViewPageContents bind:placeMark={placeMark} />

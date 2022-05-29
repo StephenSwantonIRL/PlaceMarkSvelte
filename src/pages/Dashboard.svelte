@@ -39,6 +39,7 @@
 
     function sortPlaces() {
         myPlaceMarks = []
+        othersPlaceMarks = []
         if (places) {
             for (let i = 0; i < places.length; i += 1) {
                 if (places[i].createdBy === $userStore._id) {

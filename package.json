@@ -27,6 +27,7 @@
     "@ckeditor/ckeditor5-paragraph": "^34.0.0",
     "@ckeditor/ckeditor5-theme-lark": "^34.0.0",
     "axios": "^0.27.2",
+    "leaflet": "^1.8.0",
     "svelte-spa-router": "^3.2.0"
   }
 }
