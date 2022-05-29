@@ -1,5 +1,5 @@
 <script>
-  let categories = [];
+  export let categories;
 </script>
 
 <section class="section">
@@ -11,6 +11,7 @@
     <th></th>
     </thead>
     <tbody>
+    {#if categories.length > 0}
     {#each categories as category}
       <tr>
         <td id="{category._id}">{category.name}</td>
@@ -23,6 +24,7 @@
         </a></td>
       </tr>
     {/each}
+      {/if}
     </tbody>
   </table>
   </form>

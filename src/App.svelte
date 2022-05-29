@@ -10,6 +10,8 @@
     import Dashboard from "./pages/Dashboard.svelte";
     import Admin from "./pages/Admin.svelte";
     import Category from "./pages/Category.svelte";
+    import ViewPlace from "./pages/ViewPlace.svelte";
+
     const title = "PlaceMark v2!";
     import Index from "./pages/Index.svelte";
     import SignUp from "./pages/SignUp.svelte";
@@ -29,6 +31,7 @@
         "/editAccount": EditUser,
         "/addPlace": CreatePlace,
         "/editPlace/:id": EditPlace,
+        "/viewPlace/:id": ViewPlace,
         "/about": About,
         "/dashboard": Dashboard,
         '/admin': wrap({

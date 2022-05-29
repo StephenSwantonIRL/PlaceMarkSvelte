@@ -3,6 +3,7 @@
     import Menu from "../../components/Menu.svelte";
     import {getContext} from "svelte";
     import {userStore} from "../../stores/user.js";
+    import {onMount} from "svelte";
 
     const placeMarkService = getContext("PlaceMarkService");
 
@@ -63,6 +64,15 @@
     let adminValue
     $: adminValue = {isAdmin}['isAdmin']
     $: console.log(adminValue);
+
+
+    async function deletePlace(id) {
+        const response = await placeMarkService.deletePlace(id);
+        if(response){
+            myPlaceMarks = myPlaceMarks.filter(data => data._id != id);
+        }
+    }
+
 </script>
 
 <Menu bind:isAdmin={adminValue} />
@@ -91,12 +101,12 @@
                 <td>{placeMark.latitude}</td>
                 <td>{placeMark.longitude}</td>
                 <td>
-                    <button class="button is-small" onclick="openModal('{placeMark._id}')">
+                    <a class="button is-small" href="/#/viewPlace/{placeMark._id}">
                         View
-                    </button>
+                    </a>
                     <a class="button is-small" href="/#/editPlace/{placeMark._id}">
                         Edit
-                    </a> <a class="button is-small" href="/deletePlace/{placeMark._id}">
+                    </a> <a class="button is-small" on:click={() => deletePlace(placeMark._id)}>
                     Delete
                 </a>
                 </td>
@@ -123,9 +133,9 @@
                 <td>{placeMark.latitude}</td>
                 <td>{placeMark.longitude}</td>
                 <td>
-                    <button class="button is-small" onclick="openModal('{placeMark._id}')">
+                    <a class="button is-small" href="/#/viewPlace/{placeMark._id}">
                         View
-                    </button>
+                    </a>
                 </td>
             </tr>
         {/each}
