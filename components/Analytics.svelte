@@ -1,10 +1,10 @@
 <script>
-  let totalCategories ="";
-  let totalUsers ="";
-  let totalPlaces ="";
-  let avgPerCategory = "";
-  let avgPerUser = "";
-  let topCounts = [];
+  export let totalCategories;
+  export let totalUsers;
+  export let totalPlaces;
+  export let avgPlacesPerCategory;
+  export let avgPlacesPerUser;
+  export let topCounts;
 </script>
 
 <section class="section">
@@ -21,8 +21,8 @@
     <div class="column">
       <h5 class="title is-5">Averages</h5>
       <ul>
-      <li>Places per Category: {avgPerCategory}</li>
-      <li>Places per User: {avgPerUser}</li>
+      <li>Places per Category: {avgPlacesPerCategory}</li>
+      <li>Places per User: {avgPlacesPerUser}</li>
       </ul>
     </div>
     <div class="column">
