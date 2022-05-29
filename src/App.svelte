@@ -11,6 +11,7 @@
     import Admin from "./pages/Admin.svelte";
     import Category from "./pages/Category.svelte";
     import ViewPlace from "./pages/ViewPlace.svelte";
+    import Map from "./pages/Map.svelte";
 
     const title = "PlaceMark v2!";
     import Index from "./pages/Index.svelte";
@@ -32,6 +33,7 @@
         "/addPlace": CreatePlace,
         "/editPlace/:id": EditPlace,
         "/viewPlace/:id": ViewPlace,
+        "/map": Map,
         "/about": About,
         "/dashboard": Dashboard,
         '/admin': wrap({
