@@ -3,6 +3,7 @@
 
     export let images;
     export let imagesInput;
+    let container;
     const placeMarkService = getContext("PlaceMarkService");
 
     function uploadImage() {
@@ -12,17 +13,9 @@
 
         placeMarkService.uploadImage(formData)
             .then((data) => {
-                var container = document.getElementById("image-container");
-                var img1 = document.createElement("img");
-                img1.setAttribute("src", data.url)
-                img1.setAttribute("id", data.url)
-                img1.setAttribute("width", "30%")
-                img1.setAttribute("onclick", "removeImage('" + data.url + "')")
-                img1.setAttribute("style", "padding-left:10px")
-                container.append(img1)
-
-                imagesInput = imagesInput + data.url + ","
-                console.log(document.getElementById('images').value)
+                images.push(data.url);
+                images = images;
+                imagesInput = imagesInput + data.url + ",";
                 imagesInput = imagesInput;
             })
             .catch(error => console.log(error));
@@ -44,7 +37,7 @@
     <div>
         <div>
             <label class="label">Add Images</label>
-            <div id="image-container">
+            <div bind:this={container} id="image-container">
                 {#if images}
                     {#each images as image}
                         <img id="{image}" src="{image}" on:click={removeImage.bind(this, image)} width="30%"
