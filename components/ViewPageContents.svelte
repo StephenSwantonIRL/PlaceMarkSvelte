@@ -24,5 +24,15 @@
     <div class="container"><h4 class="title is-4" style="padding-top:10px">About this PlaceMark</h4></div>
     <div class="container" id="placeMarkDescription">{@html placeMark.description}</div>
     <div class="container" id="placeMarkCategories">{placeMark.categories}</div>
-    <div class="container" id="placeMarkImages" style="padding-top:10px;">{placeMark.images}</div>
+    <div class="container" id="placeMarkImages" style="padding-top:10px;">
+        {#if placeMark.images }
+            {#if placeMark.images.length > 0 }
+                {#each placeMark.images as image}
+                    <img src={image} id={image} max-width="50%"
+                         style="padding-left:10px; max-height:350px; border:solid 1px #B1A727"/>
+                {/each}
+            {/if}
+        {/if}
+
+    </div>
 </section>
