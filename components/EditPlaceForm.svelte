@@ -6,9 +6,10 @@
 
     const placeMarkService = getContext("PlaceMarkService");
     export let place;
-
+    export let imagesInput;
     let images = "";
-    let imagesInput = "";
+
+
     let render = "nothing"
     $: imagesInput = imagesInput
 
@@ -77,7 +78,7 @@
             <textarea id="ck-editor" placeholder="Tell us about this PlaceMark"> {place.description} </textarea>
             <input id="ck-description" name="description" type="hidden" bind:value="{place.description}"/>
         </div>
-        <PlaceMarkImages bind:images={images} bind:imagesInput={imagesInput}/>
+        <PlaceMarkImages bind:images={place.images} bind:imagesInput={imagesInput}/>
         <div class="field"><label class="label">Categories</label>
             <input id="input-custom-dropdown" name="categories" type="text" class="input" placeholder="Enter Categories"
                    bind:value={place.categories}></div>

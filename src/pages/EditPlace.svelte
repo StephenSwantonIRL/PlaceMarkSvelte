@@ -15,7 +15,7 @@
     let longitude = "";
     let categories = "";
     let images = "";
-
+    let imagesInput;
     const placeMarkService = getContext("PlaceMarkService");
 
     async function getPlace(id) {
@@ -23,22 +23,23 @@
         return place;
 
     }
-    let description ="";
+
+    let description = "";
     let place = getPlace(_id)
         .then((x) => {
-            return x;
+            if (place.images) {
+                imagesInput = place.images.join(',') + ','
+                return x;
+            }
         });
     $: console.log(place)
     let errorMessage = "";
 
-
-
-
 </script>
-<Menu />
+<Menu/>
 <section class="section header">
     <h1 class="title">Edit PlaceMark</h1>
 </section>
-<EditPlaceForm bind:place={place} />
+<EditPlaceForm bind:place={place} bind:imagesInput/>
 
 <PlaceMarkImgHandler/>

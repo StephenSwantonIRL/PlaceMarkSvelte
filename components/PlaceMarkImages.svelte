@@ -23,14 +23,18 @@
 
                 imagesInput = imagesInput + data.url + ","
                 console.log(document.getElementById('images').value)
-
+                imagesInput = imagesInput;
             })
             .catch(error => console.log(error));
 
     }
 
-    function removeImage(url) {
+    async function removeImage(url) {
+        console.log(url);
         imagesInput = imagesInput.replace(url + ',', '');
+        let cloudinaryId = url.match(/\/([a-zA-Z0-9]*)\.(?:jpeg|jpg|png)/)[1]
+        const remove = await placeMarkService.deleteImage(cloudinaryId)
+        console.log(remove)
         document.getElementById(url).remove();
     }
 
@@ -41,10 +45,12 @@
         <div>
             <label class="label">Add Images</label>
             <div id="image-container">
-                {#each images as image}
-                    <img id="{image}" src="{image}" on:click={()=> removeImage({image})} width="30%"
-                         style="padding-left:10px"/>
-                {/each}
+                {#if images}
+                    {#each images as image}
+                        <img id="{image}" src="{image}" on:click={removeImage.bind(this, image)} width="30%"
+                             style="padding-left:10px"/>
+                    {/each}
+                {/if}
             </div>
         </div>
         <div class="card-content">
