@@ -50,7 +50,7 @@
                 }
             ]
         }),
-    "/category/:id": Category,
+        "/category/:id": Category,
 
     }
 

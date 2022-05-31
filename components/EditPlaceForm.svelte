@@ -3,8 +3,14 @@
     import {push} from "svelte-spa-router";
     import {getContext} from "svelte";
     import PlaceMarkImages from "./PlaceMarkImages.svelte";
+
     const placeMarkService = getContext("PlaceMarkService");
     export let place;
+
+    let images = "";
+    let imagesInput = "";
+    let render = "nothing"
+    $: imagesInput = imagesInput
 
     async function updatePlace() {
         let updatedPlace = {
@@ -15,7 +21,7 @@
             longitude: place.longitude,
             description: document.getElementById('ck-description').value,
             categories: place.categories.toString(),
-            images: place.images.toString(),
+            images: imagesInput,
         }
         console.log(updatedPlace)
         let success = await placeMarkService.updatePlace(updatedPlace)
@@ -68,16 +74,14 @@
         </div>
         <div class="field">
             <label class="label">Description</label>
-            <textarea id="ck-editor" placeholder="Tell us about this PlaceMark" > {place.description} </textarea>
+            <textarea id="ck-editor" placeholder="Tell us about this PlaceMark"> {place.description} </textarea>
             <input id="ck-description" name="description" type="hidden" bind:value="{place.description}"/>
         </div>
-        <PlaceMarkImages/>
+        <PlaceMarkImages bind:images={images} bind:imagesInput={imagesInput}/>
         <div class="field"><label class="label">Categories</label>
             <input id="input-custom-dropdown" name="categories" type="text" class="input" placeholder="Enter Categories"
                    bind:value={place.categories}></div>
         <div class="field" id="categories"></div>
-
-
         <div class="field is-grouped">
             <button class="button is-link">Save Changes</button>
         </div>

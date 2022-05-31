@@ -161,6 +161,10 @@ export class PlaceMarkService {
     return res.data;
   }
 
+  async uploadImage(options) {
+    const res = await axios.post(`${this.placeMarkUrl}/api/place/uploadimage`, options);
+    return res.data;
+  }
 
 
 
