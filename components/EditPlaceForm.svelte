@@ -3,17 +3,42 @@
     import {push} from "svelte-spa-router";
     import {getContext} from "svelte";
     import PlaceMarkImages from "./PlaceMarkImages.svelte";
+    import DescriptionField from "./DescriptionField.svelte";
+    import CategoryTags from "./CategoryTags.svelte";
 
     const placeMarkService = getContext("PlaceMarkService");
     export let place;
     export let imagesInput;
+    export let categories;
     let images = "";
-
-
+    let tag ="";
+    let tags = [];
+    let flag = false;
+    if(place.categories) {
+        console.log(place.categories)
+        if(place.categories.length === 0) {
+            flag= true;
+        }
+        for (let i = 0; i < place.categories.length; i += 1) {
+            console.log(place.categories[i].name);
+            tags.push(place.categories[i].name);
+            if (i == place.categories.length - 1) {
+                flag = true;
+            }
+        }
+    }
+    console.log("categories" + place.categories);
     let render = "nothing"
     $: imagesInput = imagesInput
 
     async function updatePlace() {
+        let categoryValue;
+        if(typeof(tag)==="string") {
+            categoryValue = tags.join(",");
+        } else {
+            categoryValue = tag.join(",");
+        }
+        console.log(categoryValue)
         let updatedPlace = {
             _id: place._id,
             name: place.name,
@@ -21,7 +46,7 @@
             latitude: place.latitude,
             longitude: place.longitude,
             description: document.getElementById('ck-description').value,
-            categories: place.categories.toString(),
+            categories: categoryValue,
             images: imagesInput,
         }
         console.log(updatedPlace)
@@ -35,19 +60,6 @@
         }
     }
 
-    onMount(() => {
-            ClassicEditor
-                .create(document.querySelector('#ck-editor'))
-                .then(() => {
-                    let c = document.querySelector(".ck-editor__main");
-                    c.setAttribute('onfocusout', 'storeDescription()')
-
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-    )
 
 </script>
 
@@ -73,15 +85,14 @@
                 </div>
             </div>
         </div>
-        <div class="field">
-            <label class="label">Description</label>
-            <textarea id="ck-editor" placeholder="Tell us about this PlaceMark"> {place.description} </textarea>
-            <input id="ck-description" name="description" type="hidden" bind:value="{place.description}"/>
-        </div>
+        {#if place.description }
+        <DescriptionField description={place.description}/>
+        {/if}
         <PlaceMarkImages bind:images={place.images} bind:imagesInput={imagesInput}/>
         <div class="field"><label class="label">Categories</label>
-            <input id="input-custom-dropdown" name="categories" type="text" class="input" placeholder="Enter Categories"
-                   bind:value={place.categories}></div>
+            {#if categories.length >0}
+            <CategoryTags bind:categories bind:tags bind:tag/>
+            {/if}
         <div class="field" id="categories"></div>
         <div class="field is-grouped">
             <button class="button is-link">Save Changes</button>

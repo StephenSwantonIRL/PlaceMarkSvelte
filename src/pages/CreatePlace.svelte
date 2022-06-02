@@ -5,6 +5,7 @@
     import {getContext} from "svelte";
     import PlaceMarkImages from "../../components/PlaceMarkImages.svelte";
     import Menu from "../../components/Menu.svelte";
+    import CategoryTags from "../../components/CategoryTags.svelte";
 
     const placeMarkService = getContext("PlaceMarkService");
 
@@ -12,10 +13,11 @@
     let location = "";
     let latitude = "";
     let longitude = "";
-    let categories = "";
     let images = "";
     let errorMessage = "";
     let imagesInput = "";
+    let tag;
+    let tags =[];
     $: imagesInput = imagesInput
 
 
@@ -26,7 +28,7 @@
             latitude: latitude,
             longitude: longitude,
             description: document.getElementById('ck-description').value,
-            categories: categories,
+            categories: tag.join(","),
             images: imagesInput,
         }
         console.log(place)
@@ -39,6 +41,23 @@
             errorMessage = "Error, please check required fields.";
         }
     }
+
+    async function getAllCategories() {
+        let allCategories = await placeMarkService.getAllCategories();
+        return allCategories;
+    }
+
+    let categories = []
+
+    getAllCategories()
+        .then((x) => {
+
+            for (let i = 0; i < x.length; i += 1) {
+                categories.push(x[i].name);
+            }
+            categories= categories;
+            return x;
+        })
 
     onMount(() => {
             ClassicEditor
@@ -87,10 +106,10 @@
             <input id="ck-description" name="description" type="hidden" value=""/>
         </div>
         <PlaceMarkImages bind:images={images} bind:imagesInput={imagesInput}/>
-        <div class="field"><label class="label">Categories</label><input bind:value={categories}
-                                                                         id="input-custom-dropdown" name="categories"
-                                                                         type="text" class="input"
-                                                                         placeholder="Enter Categories"></div>
+        <div class="field"><label class="label">Categories</label>
+            {#if categories.length}
+                <CategoryTags bind:categories bind:tags bind:tag/>
+            {/if}
         <div class="field" id="categories"></div>
         <div class="field is-grouped">
             <button id="submit" class="button is-link">Add PlaceMark</button>
@@ -99,7 +118,6 @@
 </section>
 <section>
 
-    <p> test {imagesInput}</p>
 </section>
 {#if errorMessage}
     <div class="section">
