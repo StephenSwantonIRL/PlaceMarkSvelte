@@ -1,40 +1,56 @@
-
 <script>
     import 'leaflet/dist/leaflet.css';
     import {LeafletMap} from "../../services/leaflet-map.js";
     import {onMount} from "svelte";
     import {getContext} from "svelte";
-
-    export let id;
+    import Menu from "../../components/Menu.svelte";
+    import CategoryLayeredMap from "../../components/CategoryLayeredMap.svelte";
 
     const placeMarkService = getContext("PlaceMarkService")
 
+    async function assignCategoryNameToPlaces() {
 
-    onMount(async () => {
-        const mapConfig = {
-            location: {lat: 0, lng: 50},
-            zoom: 3,
-            minZoom: 1,
-        };
-        const map = new LeafletMap("place-map", mapConfig);
-        function addPlaceMarker(place) {
-            const label = `${place.name}`;
-            map.addMarker({lat: place.latitude, lng: place.longitude}, label);
-        }
-        const places = await placeMarkService.getAllPlaces()
-            .then((places) => {
-                console.log(places);
-                map.showZoomControl();
-                map.showLayerControl();
-
-                places.forEach(place => {
-                    addPlaceMarker(place);
+        let data = await placeMarkService.getAllCategories()
+            .then((categories) => {
+                let categoryNames = [];
+                let placesWithCategory = [];
+                categories.forEach(category => {
+                    categoryNames.push(category.name);
+                    category.places.forEach(place => {
+                        name = category.name
+                        placesWithCategory.push({place, name})
+                    })
                 });
-            });
-    });
+                console.log("CategoryNames " + categoryNames)
+                console.log(placesWithCategory)
+                return {categoryNames, placesWithCategory}
+            })
+        return data
+    }
+
+    let data = assignCategoryNameToPlaces();
+
+    let mapdata = {};
+    $: mapdata = data;
+
+    async function retrievePlaces(category) {
+        let placesArray = []
+        if (category._id) {
+            for (let i = 0; i < category.places.length; i += 1) {
+                let place = await placeMarkService.getPlace(category.places[i])
+                console.log(place);
+                placesArray.push(place);
+            }
+            console.log(placesArray)
+            return placesArray;
+        }
+        return [];
+    }
+
 
 
 </script>
-
-<div class="box" id="place-map" style="height:800px">
-</div>
+<Menu/>
+{#await data then data}
+<CategoryLayeredMap data={data} />
+{/await}
