@@ -6,6 +6,11 @@ export class LeafletMap {
     overlays = {};
 
     baseLayers = {
+        Transport: L.tileLayer("https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=f80b0322328c4b24a065ff9ec2857111", {
+            maxZoom: 17,
+            attribution:
+                'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+        }),
         Terrain: L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             maxZoom: 17,
             attribution:
@@ -58,8 +63,8 @@ export class LeafletMap {
         this.imap.panTo(new L.LatLng(location.lat, location.lng));
     }
 
-    zoomTo(location) {
-        this.imap.setView(new L.LatLng(location.lat, location.lng), 8);
+    zoomTo(zoom, location) {
+        this.imap.setView(new L.LatLng(location.lat, location.lng), zoom);
     }
 
     addMarker(location, popupText = "", layerTitle = "default") {
@@ -84,5 +89,20 @@ export class LeafletMap {
         this.imap.invalidateSize();
         let hiddenMethodMap = this.imap;
         hiddenMethodMap._onResize();
+    }
+
+    on(event, method){
+        return this.imap.on(event, method);
+    }
+
+    getZoom(){
+        return this.imap.getZoom();
+    }
+
+    setZoom(zoomLevel){
+        return this.imap.setZoom(zoomLevel);
+    }
+    getCenter(){
+        return this.imap.getCenter();
     }
 }
