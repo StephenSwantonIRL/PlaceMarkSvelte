@@ -2,7 +2,6 @@
     import {onMount} from "svelte";
     import {push} from "svelte-spa-router";
     import {getContext} from "svelte";
-    import PlaceMarkImgHandler from "../../components/PlaceMarkImgHandler.svelte";
     import EditPlaceForm from "../../components/EditPlaceForm.svelte";
     import Menu from "../../components/Menu.svelte";
 
@@ -58,4 +57,3 @@
 
 <EditPlaceForm bind:place={place} bind:imagesInput bind:categories />
 {/if}
-<PlaceMarkImgHandler/>
