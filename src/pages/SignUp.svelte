@@ -3,6 +3,8 @@
   import {push} from "svelte-spa-router";
   import {getContext} from "svelte";
 
+  import github from "../../assets/GitHub_Logo.png";
+
   const placeMarkService = getContext("PlaceMarkService")
 
   let firstName = "";
@@ -45,7 +47,7 @@
       <label class="label">Password</label> <input class="input" bind:value={password} type="password" placeholder="Enter Password" name="password">
     </div>
     <div class="field is-grouped">
-      <button id="submit" class="button is-link">Submit</button>
+      <button id="submit" class="button is-link">Submit</button>  <a href="{placeMarkService.placeMarkUrl}/auth" id="github" class="button is-inverted is-link">Sign up with <img alt="Github" src={github} style="width:60px" class="is-small"></a>
     </div>
   </form>
 </section>

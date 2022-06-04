@@ -6,7 +6,6 @@
     import {wrap} from 'svelte-spa-router/wrap'
 
     import EditPlace from "./pages/EditPlace.svelte";
-    import About from "./pages/About.svelte";
     import Dashboard from "./pages/Dashboard.svelte";
     import Admin from "./pages/Admin.svelte";
     import Category from "./pages/Category.svelte";
@@ -17,12 +16,12 @@
     import Index from "./pages/Index.svelte";
     import SignUp from "./pages/SignUp.svelte";
     import Login from "./pages/Login.svelte";
-    import EditUser from "./pages/EditUser.svelte";
     import CreatePlace from "./pages/CreatePlace.svelte";
 
     setContext("PlaceMarkService", new PlaceMarkService("http://localhost:4000"));
 
     import Router, {replace} from "svelte-spa-router";
+    import OAuth from "./pages/OAuth.svelte";
 
     const placeMarkService = getContext("PlaceMarkService");
 
@@ -81,7 +80,14 @@
                 }
             ]
         }),
-        "/category/:id": Category,
+        "/category/:id": wrap({
+            component: Category,
+            conditions: [
+                async () => {
+                    return await placeMarkService.checkToken();
+                }]
+        }),
+        "/auth/:id/:token": OAuth,
 
     }
 

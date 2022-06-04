@@ -30,8 +30,6 @@ export class PlaceMarkService {
             axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
             if (response.data.success) {
                 const userDetails = await axios.post(`${this.placeMarkUrl}/api/users/find`, {email: user.email});
-                console.log(userDetails)
-                console.log(userDetails.data._id)
                 userStore.set({
                     firstName: userDetails.data.firstName,
                     lastName: userDetails.data.lastName,
