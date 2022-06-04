@@ -1,17 +1,19 @@
 <script>
     import Chart from "svelte-frappe-charts"
-    import {onMount} from "svelte";
 
-    export let topCounts;
-    $: console.log({topCounts});
+    export let chartLabel;
+    export let chartValue;
+    export let chartData;
+    export let type;
+    export let chartTitle;
     let labels = [];
     let values = [];
 
-    function updateChart(topCounts) {
+    function updateChart(chartData) {
         let labels = [];
         let values = [];
-        topCounts.forEach((record) => (labels.push(record.firstName)));
-        topCounts.forEach((record) => (values.push(record.count)));
+        chartData.forEach((record) => (labels.push(record[chartLabel])));
+        chartData.forEach((record) => (values.push(record[chartValue])));
         data = {
             labels: labels,
             datasets: [
@@ -22,7 +24,7 @@
         }
     }
 
-    $: if({topCounts}) {updateChart(topCounts)};
+    $: if({chartData}) {updateChart(chartData)};
 
     let data = {
         labels: labels,
@@ -35,4 +37,5 @@
 
 </script>
 
-<Chart bind:data type="bar" />
+<h3 class="is-3 is-title">{chartTitle} </h3>
+<Chart bind:data type={type} />
