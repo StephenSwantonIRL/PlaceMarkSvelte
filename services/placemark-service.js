@@ -1,5 +1,6 @@
 import axios from "axios";
 import {userStore} from "../stores/user.js";
+import {push} from "svelte-spa-router";
 
 export class PlaceMarkService {
     placeMarkUrl = ""
@@ -55,6 +56,8 @@ export class PlaceMarkService {
 
     async logout() {
         // eslint-disable-next-line dot-notation
+        console.log(userStore);
+        const res = await axios.post(`${this.placeMarkUrl}/api/revokeToken`,);
         axios.defaults.headers.common["Authorization"] = "";
         userStore.set({
             firstName: "",
@@ -64,6 +67,7 @@ export class PlaceMarkService {
             token: "",
         });
         localStorage.removeItem("currentUser");
+        return "Logged Out."
     }
 
     async createUser(user) {
@@ -170,5 +174,14 @@ export class PlaceMarkService {
         const res = await axios.delete(`${this.placeMarkUrl}/api/place/deleteimage/${id}`);
         return res.data;
     }
+
+    async checkToken() {
+        const res = await axios.get(`${this.placeMarkUrl}/api/checkToken`);
+        if (res.data.statusCode == 401) {
+            return false;
+        };
+        return true;
+    }
+
 
 };

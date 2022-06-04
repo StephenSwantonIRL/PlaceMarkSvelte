@@ -19,9 +19,10 @@
     import Login from "./pages/Login.svelte";
     import EditUser from "./pages/EditUser.svelte";
     import CreatePlace from "./pages/CreatePlace.svelte";
+
     setContext("PlaceMarkService", new PlaceMarkService("http://localhost:4000"));
 
-    import Router from "svelte-spa-router";
+    import Router, {replace} from "svelte-spa-router";
 
     const placeMarkService = getContext("PlaceMarkService");
 
@@ -29,19 +30,49 @@
         "/": Index,
         "/signup": SignUp,
         "/login": Login,
-        "/editAccount": EditUser,
-        "/addPlace": CreatePlace,
-        "/editPlace/:id": EditPlace,
-        "/viewPlace/:id": ViewPlace,
-        "/map": Map,
-        "/about": About,
-        "/dashboard": Dashboard,
+        "/addPlace": wrap({
+            component: CreatePlace,
+            conditions: [
+                async () => {
+                    return await placeMarkService.checkToken();
+                }]
+        }),
+        "/editPlace/:id": wrap({
+            component: EditPlace,
+            conditions: [
+                async () => {
+                    return await placeMarkService.checkToken();
+                }]
+        }),
+        "/viewPlace/:id": wrap({
+            component: ViewPlace,
+            conditions: [
+                async () => {
+                    return await placeMarkService.checkToken();
+                }]
+        }),
+        "/map": wrap({
+            component: Map,
+            conditions: [
+                async () => {
+                    return await placeMarkService.checkToken();
+                }]
+        }),
+        "/dashboard": wrap({
+            component: Dashboard,
+            conditions: [
+                async () => {
+                    return await placeMarkService.checkToken();
+                }]
+        }),
         '/admin': wrap({
             asyncComponent: () => import('./pages/Admin.svelte'),
             conditions: [
                 async () => {
+                    return await placeMarkService.checkToken();
+                },
+                async () => {
                     const response = await placeMarkService.getUser($userStore._id)
-                    console.log(response)
                     if (response.isAdmin === true) {
                         return true
                     } else {
@@ -55,8 +86,14 @@
     }
 
 
+    function conditionsFailed(event) {
+        console.error('conditionsFailed event', event.detail)
+        replace('/login')
+    }
+
+
 </script>
 
 <div class="container">
-    <Router {routes}/>
+    <Router {routes} on:conditionsFailed={conditionsFailed}/>
 </div>

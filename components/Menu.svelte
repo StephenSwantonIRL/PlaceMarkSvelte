@@ -1,7 +1,18 @@
 <script>
     import Brand from "./Brand.svelte";
+    import {getContext} from "svelte";
+    import {push} from "svelte-spa-router";
 
     export let isAdmin;
+
+    const placeMarkService = getContext("PlaceMarkService");
+
+    async function logout() {
+        const logout = await placeMarkService.logout();
+        if (logout) {
+            push("/login");
+        }
+    }
 </script>
 
 
@@ -21,7 +32,7 @@
                         <a id="admin" class="button" href="/#/admin"> Admin </a>
                     {/if}
                     <a id="addPlace" class="button" href="/#/addPlace"> Add Place </a>
-                    <a id="logout" class="button" href="/#/logout"> Logout </a>
+                    <a id="logout" class="button" on:click={logout}> Logout </a>
                 </div>
             </div>
         </div>
