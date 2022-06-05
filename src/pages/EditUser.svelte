@@ -2,6 +2,7 @@
     import {Buffer} from "buffer";
     import {push} from "svelte-spa-router";
     import {getContext} from "svelte";
+    import WelcomeMenu from "../../components/WelcomeMenu.svelte";
 
     const placeMarkService = getContext("PlaceMarkService");
 
@@ -50,7 +51,7 @@
     }
 </script>
 
-
+<WelcomeMenu />
 <section class="section">
     <h1 class="title">Complete Sign Up</h1>
     <form on:submit|preventDefault={signup}>
