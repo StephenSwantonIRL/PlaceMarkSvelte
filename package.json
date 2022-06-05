@@ -27,6 +27,7 @@
     "@ckeditor/ckeditor5-paragraph": "^34.0.0",
     "@ckeditor/ckeditor5-theme-lark": "^34.0.0",
     "axios": "^0.27.2",
+    "buffer": "^6.0.3",
     "leaflet": "^1.8.0",
     "lodash": "^4.17.21",
     "svelte-frappe-charts": "^1.9.2",

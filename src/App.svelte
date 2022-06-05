@@ -22,6 +22,7 @@
 
     import Router, {replace} from "svelte-spa-router";
     import OAuth from "./pages/OAuth.svelte";
+    import EditUser from "./pages/EditUser.svelte";
 
     const placeMarkService = getContext("PlaceMarkService");
 
@@ -88,6 +89,7 @@
                 }]
         }),
         "/auth/:id/:token": OAuth,
+        "/github/:data": EditUser,
 
     }
 
