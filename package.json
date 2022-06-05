@@ -31,6 +31,7 @@
     "leaflet": "^1.8.0",
     "lodash": "^4.17.21",
     "svelte-frappe-charts": "^1.9.2",
-    "svelte-spa-router": "^3.2.0"
+    "svelte-spa-router": "^3.2.0",
+    "svelte-tags-input": "^2.9.2"
   }
 }

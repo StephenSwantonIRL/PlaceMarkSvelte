@@ -18,9 +18,9 @@
     import Login from "./pages/Login.svelte";
     import CreatePlace from "./pages/CreatePlace.svelte";
 
-    setContext("PlaceMarkService", new PlaceMarkService("http://localhost:4000"));
+    setContext("PlaceMarkService", new PlaceMarkService("https://placemarkobscura.glitch.me/"));
 
-    import Router, {replace} from "svelte-spa-router";
+    import Router, {push} from "svelte-spa-router";
     import OAuth from "./pages/OAuth.svelte";
     import EditUser from "./pages/EditUser.svelte";
     import NotFound from "./pages/NotFound.svelte";
@@ -98,7 +98,7 @@
 
     function conditionsFailed(event) {
         console.error('conditionsFailed event', event.detail)
-        replace('/login')
+        push('/login')
     }
 
 

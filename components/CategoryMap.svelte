@@ -1,5 +1,4 @@
 <script>
-    import 'leaflet/dist/leaflet.css';
     import {LeafletMap} from "../services/leaflet-map.js";
     import {onMount} from "svelte";
 

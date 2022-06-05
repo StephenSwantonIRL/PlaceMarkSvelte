@@ -13,7 +13,7 @@
     let location = "";
     let latitude = "";
     let longitude = "";
-    let images = "";
+    let images = [];
     let errorMessage = "";
     let imagesInput = "";
     let tag;

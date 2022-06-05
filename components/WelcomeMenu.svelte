@@ -10,6 +10,7 @@ import Brand from "./Brand.svelte";
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
+          <a class="button" id="map" href="/#/map"> Map </a>
           <a class="button" id="login" href="/#/login"> Log in </a>
           <a class="button" id="signup" href="/#/signup"> Sign up </a>
         </div>
